@@ -1,0 +1,34 @@
+language: ruby
+gemfile:
+- Gemfile
+rvm:
+- 1.9.3
+env:
+  global:
+  - secure: LCtQadwj9PnAOhHz5J40ijKFti3RsGG5eGhvxdt15e1AZdK8zUuMGreHry6XWDZcwy9a0yUs0FjKRH2I2h2Pw1Yn80A5ttM9CG0n36q+3wC7EddVSHo2QEsGxNZVPCH0CMNVq4o+9hyx1aiVUP9wi6KP0Q6KSvsbQDWn02Z+mnE=
+  - secure: j/dzLo2/JWAWkBedFvIsjrxkR5v7/zLCc3PEbF5H1AfOOBGCmy6X6H2zG7dXkEboWiCGnb3gDESKmM0llSfCOsv6TcmGL/jzCxYg/UoXN0xyMhoj5WuGk1BAtDVvaHjhgU+wodcloxYaiMusiR1sJf5rsgkQvJqi1Bb1XwpVFJI=
+  - secure: ihdFOHmRsIh7dERyTf25D2sXaHxXNSVeowtRXyx95x+Ad9wM5Z67NffN7pcbQTMK4bP4MtAor4HcjsU0FumNMth0NVnXyVR8q9FhIcZAIizdKIMHCDmP18tz75l9TlvL8s19rdFDArdkY6/LE5olfUU+/+ND2NkqNIzgWfnUHxA=
+  matrix:
+  - KITCHEN_INSTANCE='default-ubuntu-1204'
+  - KITCHEN_INSTANCE='default-ubuntu-1004'
+  - KITCHEN_INSTANCE='default-centos-64'
+  - KITCHEN_INSTANCE='default-centos-53'
+  - KITCHEN_INSTANCE='default-zoo-ubuntu-1204'
+  - KITCHEN_INSTANCE='default-zoo-ubuntu-1004'
+  - KITCHEN_INSTANCE='default-zoo-centos-64'
+  - KITCHEN_INSTANCE='default-zoo-centos-53'
+  - KITCHEN_INSTANCE='create-collection-ubuntu-1204'
+  - KITCHEN_INSTANCE='create-collection-ubuntu-1004'
+  - KITCHEN_INSTANCE='create-collection-centos-64'
+  - KITCHEN_INSTANCE='create-collection-centos-53'
+  - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1204'
+  - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1004'
+  - KITCHEN_INSTANCE='create-collection-zoo-centos-64'
+  - KITCHEN_INSTANCE='create-collection-zoo-centos-53'
+script:
+- bundle exec kitchen test $KITCHEN_INSTANCE
+after_script:
+- bundle exec kitchen destroy $KITCHEN_INSTANCE
+notifications:
+  email:
+  - abutovich@qubell.com
