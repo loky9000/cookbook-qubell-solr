@@ -12,19 +12,19 @@ env:
   - KITCHEN_INSTANCE='default-ubuntu-1204'
   - KITCHEN_INSTANCE='default-ubuntu-1004'
   - KITCHEN_INSTANCE='default-centos-64'
-  - KITCHEN_INSTANCE='default-centos-53'
+#  - KITCHEN_INSTANCE='default-centos-53'
   - KITCHEN_INSTANCE='default-zoo-ubuntu-1204'
   - KITCHEN_INSTANCE='default-zoo-ubuntu-1004'
   - KITCHEN_INSTANCE='default-zoo-centos-64'
-  - KITCHEN_INSTANCE='default-zoo-centos-53'
+#  - KITCHEN_INSTANCE='default-zoo-centos-53'
   - KITCHEN_INSTANCE='create-collection-ubuntu-1204'
   - KITCHEN_INSTANCE='create-collection-ubuntu-1004'
   - KITCHEN_INSTANCE='create-collection-centos-64'
-  - KITCHEN_INSTANCE='create-collection-centos-53'
+#  - KITCHEN_INSTANCE='create-collection-centos-53'
   - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1204'
   - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1004'
   - KITCHEN_INSTANCE='create-collection-zoo-centos-64'
-  - KITCHEN_INSTANCE='create-collection-zoo-centos-53'
+#  - KITCHEN_INSTANCE='create-collection-zoo-centos-53'
 script:
 - bundle exec kitchen test $KITCHEN_INSTANCE
 after_script:
