@@ -26,7 +26,7 @@ env:
   - KITCHEN_INSTANCE='create-collection-zoo-centos-64'
 #  - KITCHEN_INSTANCE='create-collection-zoo-centos-53'
 script:
-- bundle exec kitchen test $KITCHEN_INSTANCE
+- bundle exec kitchen test $KITCHEN_INSTANCE -l debug
 after_script:
 - bundle exec kitchen destroy $KITCHEN_INSTANCE
 notifications:
