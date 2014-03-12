@@ -8,6 +8,8 @@ cookbook 'tomcat-component', git: "https://github.com/jollyrojer/component-tomca
 cookbook 'zookeeper-component', git: "https://github.com/jollyrojer/zookeeper.git", rel: "cookbooks/zookeeper-component"
 cookbook 'solr_test', path: "./test/cookbooks/solr_test"
 
+##Added for zookeeper
+cookbook 'zookeeper', git:"https://github.com/SimpleFinance/chef-zookeeper.git", ref: "49b9d05e913b3ad9f6e4751d00faf22b4fafa520"
 ###Added for tomcat
 cookbook 'yum', git: "https://github.com/opscode-cookbooks/yum.git", ref: "76dea86a6c849a46be00086c7403d7821c1d3730"
 cookbook 'jpackage', git: "https://github.com/opscode-cookbooks/jpackage.git", ref: "be42b3f75a294a64c6b4f461c4277eaa842d0aa9"
