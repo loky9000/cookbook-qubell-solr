@@ -6,16 +6,16 @@
 require "pathname"
 
 # Extract war file from solr archive
-solr_url = "#{node["solr"]["url"]}#{node["solr"]["version"]}/solr-#{node["solr"]["version"]}.tgz"
+solr_url = "#{node["cookbook-qubell-solr"]["url"]}#{node["cookbook-qubell-solr"]["version"]}/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz"
 remote_file "solr_src" do
-  path "/tmp/solr-#{node["solr"]["version"]}.tgz"
+  path "/tmp/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz"
   source solr_url
   action :create_if_missing
 end
 
 execute "extract solr_src" do
-  command "tar -xzvf /tmp/solr-#{node["solr"]["version"]}.tgz -C /tmp"
-  creates "/tmp/solr-#{node["solr"]["version"]}"
+  command "tar -xzvf /tmp/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz -C /tmp"
+  creates "/tmp/solr-#{node["cookbook-qubell-solr"]["version"]}"
 end
 
 # Since solr 4.3.0 we need slf4j jar http://wiki.apache.org/solr/SolrLogging#Solr_4.3_and_above
@@ -31,7 +31,7 @@ ruby_block "get logging libs" do
 end
 
 #Copy sorl.war to webapps
-directory "#{node["solr"]["path"]}/webapps" do
+directory "#{node["cookbook-qubell-solr"]["path"]}/webapps" do
   mode 00755
   owner node["tomcat"]["user"]
   group node["tomcat"]["group"]
@@ -40,14 +40,14 @@ directory "#{node["solr"]["path"]}/webapps" do
 end
 
 execute "copy sorl.war" do
-  command "cp /tmp/solr-#{node["solr"]["version"]}/dist/solr-#{node["solr"]["version"]}.war #{node["solr"]["path"]}/webapps/solr.war"
-  creates "#{node["solr"]["path"]}/webapps/solr.war"
+  command "cp /tmp/solr-#{node["cookbook-qubell-solr"]["version"]}/dist/solr-#{node["cookbook-qubell-solr"]["version"]}.war #{node["cookbook-qubell-solr"]["path"]}/webapps/solr.war"
+  creates "#{node["cookbook-qubell-solr"]["path"]}/webapps/solr.war"
 end
 
-node.set["solr"]["war_uri"] = "#{node["solr"]["path"]}/webapps/solr.war"
+node.set["cookbook-qubell-solr"]["war_uri"] = "#{node["cookbook-qubell-solr"]["path"]}/webapps/solr.war"
 
 #create solr/cores dir
-directory "#{node["solr"]["path"]}/cores" do
+directory "#{node["cookbook-qubell-solr"]["path"]}/cores" do
   owner "#{node["tomcat"]["user"]}"
   group "#{node["tomcat"]["user"]}"
   mode "00755"
@@ -55,13 +55,13 @@ directory "#{node["solr"]["path"]}/cores" do
 end
 
 #create cores config
-template "#{node["solr"]["path"]}/cores/solr.xml" do
+template "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml" do
   owner node["tomcat"]["user"]
   group node["tomcat"]["group"]
   source "solr.xml.erb"
 end
 
-directory "#{node["solr"]["logdir"]}" do
+directory "#{node["cookbook-qubell-solr"]["logdir"]}" do
   owner node["tomcat"]["user"]
   group node["tomcat"]["group"]
   mode 00755
@@ -69,16 +69,16 @@ directory "#{node["solr"]["logdir"]}" do
 end
 
 #create log4j props
-template "#{node["solr"]["path"]}/webapps/log4j.properties" do
+template "#{node["cookbook-qubell-solr"]["path"]}/webapps/log4j.properties" do
   owner node["tomcat"]["user"]
   group node["tomcat"]["group"]
   source "log4j.properties.xml.erb"
 end
 
 execute "ln home" do
-  command "ln -sf #{node["solr"]["path"]} #{node["tomcat"]["base"]}/solr"
+  command "ln -sf #{node["cookbook-qubell-solr"]["path"]} #{node["tomcat"]["base"]}/solr"
 end
 
 execute "change solr owner" do
-  command "chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["group"]} #{node["solr"]["path"]}"
+  command "chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["group"]} #{node["cookbook-qubell-solr"]["path"]}"
 end

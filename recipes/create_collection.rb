@@ -6,10 +6,10 @@
 require "pathname"
 
 #Populate collections
-if ( node["solr"]["collection"][0].start_with?('http:','https:','ftp:','file:'))
+if ( node["cookbook-qubell-solr"]["collection"][0].start_with?('http:','https:','ftp:','file:'))
   #if collection uri
   require 'uri'
-  collection = node['solr']['collection'][0]
+  collection = node['cookbook-qubell-solr']['collection'][0]
   uri = URI.parse(collection)
   file_name = File.basename(uri.path)
   ext_name = File.extname(file_name)
@@ -36,9 +36,9 @@ if ( node["solr"]["collection"][0].start_with?('http:','https:','ftp:','file:'))
     bash "unpack collection #{target_file}" do
       user "root"
       code <<-EOH
-      tar -xzvf #{target_file} -C #{node["solr"]["path"]}/cores/
+      tar -xzvf #{target_file} -C #{node["cookbook-qubell-solr"]["path"]}/cores/
       chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["solr"]["path"]}/cores
-      chmod -R 755 #{node["solr"]["path"]}/cores
+      chmod -R 755 #{node["cookbook-qubell-solr"]["path"]}/cores
       EOH
     end
   when ".zip"
@@ -49,8 +49,8 @@ if ( node["solr"]["collection"][0].start_with?('http:','https:','ftp:','file:'))
       user "root"
       code <<-EOH
        unzip -o #{target_file} -d #{node["solr"]["path"]}/cores/
-      chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["solr"]["path"]}/cores
-      chmod -R 755 #{node["solr"]["path"]}/cores
+      chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["cookbook-qubell-solr"]["path"]}/cores
+      chmod -R 755 #{node["cookbook-qubell-solr"]["path"]}/cores
       EOH
     end
   end
@@ -60,44 +60,44 @@ if ( node["solr"]["collection"][0].start_with?('http:','https:','ftp:','file:'))
   file_replace "remove hostPort in solr.xml" do
     replace 'hostPort=".*"'
     with ''
-    path "#{node["solr"]["path"]}/cores/solr.xml"
+    path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
   end
   
   file_replace "remove hostContext in solr.xml" do
     replace 'hostContext=".*"'
     with ''
-    path "#{node["solr"]["path"]}/cores/solr.xml"
+    path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
   end
 
   file_replace "remove zkHost in solr.xml" do
     replace 'zkHost=".*"'
     with ''
-    path "#{node["solr"]["path"]}/cores/solr.xml"
+    path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
   end
 
-  if (! node["solr"]["zookeeper"]["nodes"].empty?)
+  if (! node["cookbook-qubell-solr"]["zookeeper"]["nodes"].empty?)
     file_replace "set zkHost" do
       replace '<solr'
-      with "<solr zkHost=\"#{node["solr"]["zookeeper"]["nodes"]}\" "
-      path "#{node["solr"]["path"]}/cores/solr.xml"
+      with "<solr zkHost=\"#{node["cookbook-qubell-solr"]["zookeeper"]["nodes"]}\" "
+      path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
     end
     file_replace "set hostPort hostContext " do
       replace '<cores'
-      with "<cores hostPort=\"#{node["solr"]["port"]}\" hostContext=\"#{node["solr"]["hostcontext"]}\" "
-      path "#{node["solr"]["path"]}/cores/solr.xml"
+      with "<cores hostPort=\"#{node["cookbook-qubell-solr"]["port"]}\" hostContext=\"#{node["cookbook-qubell-solr"]["hostcontext"]}\" "
+      path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
     end
   else
     file_replace "set hostPort hostContext" do
       replace '<cores'
-      with "<cores hostPort=\"#{node["solr"]["port"]}\" hostContext=\"#{node["solr"]["hostcontext"]}\" "
-      path "#{node["solr"]["path"]}/cores/solr.xml"
+      with "<cores hostPort=\"#{node["cookbook-qubell-solr"]["port"]}\" hostContext=\"#{node["cookbook-qubell-solr"]["hostcontext"]}\" "
+      path "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml"
     end
   end
 else
   #If collection not uri
   #Create collections
-  node["solr"]["collection"].each do |collection|
-    directory "#{node["solr"]["path"]}/cores/#{collection}/conf/" do
+  node["cookbook-qubell-solr"]["collection"].each do |collection|
+    directory "#{node["cookbook-qubell-solr"]["path"]}/cores/#{collection}/conf/" do
       owner node["tomcat"]["user"]
       group node["tomcat"]["group"]
       mode 00755
@@ -105,7 +105,7 @@ else
       action :create
     end
 
-    template "#{node["solr"]["path"]}/cores/#{collection}/conf/schema.xml" do
+    template "#{node["cookbook-qubell-solr"]["path"]}/cores/#{collection}/conf/schema.xml" do
       owner node["tomcat"]["user"]
       group node["tomcat"]["group"]
       source "schema.xml.erb"
@@ -114,7 +114,7 @@ else
       })
     end
     
-    template "#{node["solr"]["path"]}/cores/#{collection}/conf/solrconfig.xml" do
+    template "#{node["cookbook-qubell-solr"]["path"]}/cores/#{collection}/conf/solrconfig.xml" do
       owner node["tomcat"]["user"]
       group node["tomcat"]["group"]
       source "solrconfig.xml.erb"
@@ -124,7 +124,7 @@ else
     end
   end
  
-  template "#{node["solr"]["path"]}/cores/solr.xml" do
+  template "#{node["cookbook-qubell-solr"]["path"]}/cores/solr.xml" do
     owner node["tomcat"]["user"]
     group node["tomcat"]["group"]
     source "solr.xml.erb"
@@ -132,9 +132,9 @@ else
 end
 
 execute "change solr owner" do
-  command "chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["group"]} #{node["solr"]["path"]}"
+  command "chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["group"]} #{node["cookbook-qubell-solr"]["path"]}"
 end
 
-if ( ! node["solr"]["zookeeper"]["nodes"].empty? )
-  include_recipe "solr::zoo"
+if ( ! node["cookbook-qubell-solr"]["zookeeper"]["nodes"].empty? )
+  include_recipe "cookbook-qubell-solr::zoo"
 end

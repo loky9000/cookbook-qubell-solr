@@ -1,10 +1,10 @@
 ---
 driver:
   name: ec2
-  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY'] %>
-  aws_secret_access_key: <%= ENV['AWS_SECRET_KEY'] %>
-  aws_ssh_key_id: <%= ENV['AWS_SSH_KEY_ID'] %>
-  ssh_key: <%= File.expand_path('.ssh/tkitchen') %>
+  aws_access_key_id: <%= ENV['ARTIFACTS_AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['ARTIFACTS_AWS_SECRET_ACCESS_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
+  ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
   security_group_ids: ["default"]
   security_group_ids: default
   availability_zone: ""
@@ -24,7 +24,7 @@ platforms:
       username: ubuntu
       flavor_id: "m1.small"
       tags:
-        Name: solr-ct-Ubuntu-12.04
+        Name: cookbook-qubell-solr-Ubuntu-12.04
         owner_name: test-kitchen
 
   - name: ubuntu-10.04
@@ -33,7 +33,7 @@ platforms:
       username: ubuntu
       flavor_id: "m1.small"
       tags:
-        Name: solr-ct-Ubuntu-10.04
+        Name: cookbook-qubell-solr-Ubuntu-10.04
         owner_name: test-kitchen
 
   - name: centos-6.4
@@ -42,7 +42,7 @@ platforms:
       username: root
       flavor_id: "m1.small"
       tags:
-        Name: solr-ct-CentOS-6.4
+        Name: cookbook-qubell-solr-CentOS-6.4
         owner_name: test-kitchen
 
   - name: centos-5.3
@@ -57,18 +57,18 @@ platforms:
 suites:
   - name: default
     run_list:
-      - recipe[solr_test::default]
+      - recipe[cookbook-qubell-solr_test::default]
     attributes: {
-                  solr: {
+                  cookbook-qubell-solr: {
                     port: "8080",
                     loglevel: "FINEST"
                   },
                 }
   - name: default-zoo
     run_list:
-      - recipe[solr_test::default_zoo]
+      - recipe[cookbook-qubell-solr_test::default_zoo]
     attributes: {
-                  solr: {
+                  cookbook-qubell-solr: {
                     port: "8080",
                     loglevel: "FINEST",
                     zookeeper: {
@@ -78,9 +78,9 @@ suites:
                 }
   - name: create-collection 
     run_list:
-      - recipe[solr_test::create_collection]
+      - recipe[cookbook-qubell-solr_test::create_collection]
     attributes: {
-                  solr: {
+                  cookbook-qubell-solr: {
                     port: "8080",
                     loglevel: "FINEST",
                     collection: ["testcoll1", "testcoll2"]
@@ -88,10 +88,10 @@ suites:
                 }
   - name: create-collection-zoo 
     run_list:
-      - recipe[zookeeper-component]
-      - recipe[solr_test::create_collection_zoo]
+      - recipe[cookbook-qubell-zookeeper]
+      - recipe[cookbook-qubell-solr_test::create_collection_zoo]
     attributes: {
-                  solr: {
+                  cookbook-qubell-solr: {
                     port: "8080",
                     loglevel: "FINEST",
                     collection: ["testcoll1", "testcoll2"],
