@@ -23,9 +23,9 @@ end
 
 ruby_block "get logging libs" do
   block do
-    folder = "/tmp/solr-#{node["solr"]["version"]}/example/lib/ext/"
+    folder = "/tmp/solr-#{node["cookbook-qubell-solr"]["version"]}/example/lib/ext/"
     libs=(Dir.entries(folder).select {|f| !File.directory? f}).map {|f| "file://" + File.join(folder, f)}
-    node.set["solr"]["lib_uri"] = libs
+    node.set["cookbook-qubell-solr"]["lib_uri"] = libs
   end
   subscribes :create, resources(:execute => "extract solr_src")
 end

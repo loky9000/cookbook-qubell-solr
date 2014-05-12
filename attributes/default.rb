@@ -20,7 +20,7 @@ end
 
 default["cookbook-qubell-solr"]["port"]="8983"
 default["cookbook-qubell-solr"]["hostcontext"]="solr"
-default["cookbook-qubell-solr"]["logdir"]="#{node["solr"]["path"]}/logs"
+default["cookbook-qubell-solr"]["logdir"]="#{node["cookbook-qubell-solr"]["path"]}/logs"
 default["cookbook-qubell-solr"]["loglevel"]="INFO"
 default["cookbook-qubell-solr"]["zookeeper"]["loglevel"]="WARN"
 default["cookbook-qubell-solr"]["hadoop"]["loglevel"]="WARN"
