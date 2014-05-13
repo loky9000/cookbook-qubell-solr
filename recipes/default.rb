@@ -25,7 +25,7 @@ ruby_block "get logging libs" do
     libs=(Dir.entries(folder).select {|f| !File.directory? f}).map {|f| "file://" + File.join(folder, f)}
     node.set["cookbook-qubell-solr"]["lib_uri"] = libs
   end
-  subscribes :create, resources(:execute => "extract solr_src")
+  subscribes :create, resources(:bash => "get solr_src")
 end
 
 #Copy sorl.war to webapps
