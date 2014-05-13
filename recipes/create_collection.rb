@@ -37,7 +37,7 @@ if ( node["cookbook-qubell-solr"]["collection"][0].start_with?('http:','https:',
       user "root"
       code <<-EOH
       tar -xzvf #{target_file} -C #{node["cookbook-qubell-solr"]["path"]}/cores/
-      chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["solr"]["path"]}/cores
+      chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["cookbook-qubell-solr"]["path"]}/cores
       chmod -R 755 #{node["cookbook-qubell-solr"]["path"]}/cores
       EOH
     end
@@ -48,7 +48,7 @@ if ( node["cookbook-qubell-solr"]["collection"][0].start_with?('http:','https:',
     bash "unpack collection #{target_file}" do
       user "root"
       code <<-EOH
-       unzip -o #{target_file} -d #{node["solr"]["path"]}/cores/
+       unzip -o #{target_file} -d #{node["cookbook-qubell-solr"]["path"]}/cores/
       chown -R #{node["tomcat"]["user"]}:#{node["tomcat"]["user"]} #{node["cookbook-qubell-solr"]["path"]}/cores
       chmod -R 755 #{node["cookbook-qubell-solr"]["path"]}/cores
       EOH
