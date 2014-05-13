@@ -7,17 +7,15 @@ require "pathname"
 
 # Extract war file from solr archive
 solr_url = "#{node["cookbook-qubell-solr"]["url"]}#{node["cookbook-qubell-solr"]["version"]}/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz"
-remote_file "solr_src" do
-  path "/tmp/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz"
-  source solr_url
-  action :create_if_missing
+version = "#{node["cookbook-qubell-solr"]["version"]}"
+bash "get solr-src" do
+    cwd "/tmp"
+    code <<-EOH
+        curl #{solr_url} -o solr-#{version}.tgz
+        tar -zxvf /tmp/solr-#{version}.tgz -C /tmp
+      EOH
+    retries 3
 end
-
-execute "extract solr_src" do
-  command "tar -xzvf /tmp/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz -C /tmp"
-  creates "/tmp/solr-#{node["cookbook-qubell-solr"]["version"]}"
-end
-
 # Since solr 4.3.0 we need slf4j jar http://wiki.apache.org/solr/SolrLogging#Solr_4.3_and_above
 # Extract required libs
 
