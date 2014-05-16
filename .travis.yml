@@ -3,32 +3,65 @@ gemfile:
 - Gemfile
 rvm:
 - 1.9.3
+before_install:
+- echo -n $EC2_KEY_CHUNK_{0..32} >> ~/.ssh/id_ec2.base64
+- cat ~/.ssh/id_ec2.base64 | tr -d ' ' | base64 --decode > ~/.ssh/id_ec2.pem
 env:
   global:
-  - secure: LCtQadwj9PnAOhHz5J40ijKFti3RsGG5eGhvxdt15e1AZdK8zUuMGreHry6XWDZcwy9a0yUs0FjKRH2I2h2Pw1Yn80A5ttM9CG0n36q+3wC7EddVSHo2QEsGxNZVPCH0CMNVq4o+9hyx1aiVUP9wi6KP0Q6KSvsbQDWn02Z+mnE=
-  - secure: j/dzLo2/JWAWkBedFvIsjrxkR5v7/zLCc3PEbF5H1AfOOBGCmy6X6H2zG7dXkEboWiCGnb3gDESKmM0llSfCOsv6TcmGL/jzCxYg/UoXN0xyMhoj5WuGk1BAtDVvaHjhgU+wodcloxYaiMusiR1sJf5rsgkQvJqi1Bb1XwpVFJI=
-  - secure: ihdFOHmRsIh7dERyTf25D2sXaHxXNSVeowtRXyx95x+Ad9wM5Z67NffN7pcbQTMK4bP4MtAor4HcjsU0FumNMth0NVnXyVR8q9FhIcZAIizdKIMHCDmP18tz75l9TlvL8s19rdFDArdkY6/LE5olfUU+/+ND2NkqNIzgWfnUHxA=
+  - secure: NeksHcjQpUknsRoSqGZHVzDHIK+1MStkUmpgkkf6P1HM0tkY8u2Rydeb4wkQepq1rzgrC787r4LkzGjDcGblujLSCcPG8OUs5qki04cT/w4voIR9zYJc7PVj4a5zvBPqJOFDy4g6HYyAaKz3i6kGV4jRnN/7IMx823EV2DG2zu0=
+  - secure: eKRuHZqgiWIc/PrJXqIMGnUhPG+7Ww/g6s1nUu5vCKL3AzcH74nbyNAKoB3M0HFl36eYLcEYc71jf4FV+y4MjTYEJSJ4dwuruJMC8bqpnASXRKqa01TxKh887GQOA9GswB1anJe26ORNBikzyZxcA7ETnCvRPRkXQChCSU2wKW8=
+  - secure: hYi0VVY6hnHXICY2WGyXxyNfom9Pp8aS0yNkdQemBcbs5wnWqe0oa1DX4spq0XKXS6vQh1n391++mDZ5xuW+oejDam+gzU1a10sTxfxbZmKsohK2+3pGBEaIVLmXIU1vaZDG0/unf4qEg1flDKW1pYPn4KTByNZOgBWIcKlDpBw=
+  - secure: NX8zjQQQmGW0W9QBtTC48CTuM/bFqRsQj6MS7HBjGFVKJJACSynx/Azu/jFm629vt3B7rwwjynwx5WbqIbf6pQCDg1bo/ni1KdEs9VaLI5iSDMhBTsgvQxkAdKtCjJ9BvOIzQBR6Sz6l9GLfOLZOkUBusFFRDnMnhw0rKKUkPAg=
+  - secure: FqDu0FbtwzxRrzapygCtbqmrpQ+2yOLXQjZZKqxpNpWN+sVxQ1KTgqQFcO43lX09Ngfdz8ebU44B/CprSDSiIlwxI0ZP47z2Oy4I/tBmcbrA4cfdlO6QKCUUqcwvetsmLdhOUMB9XeLlQPAPTS1hY4yzFG7vM0vcxvWBG1a6pl0=
+  - secure: nOSHM+p/iPoIYzd2Oizz1wQN8A0BeU0CAHGagPXV0+Nhrl8+uEf9bcO7ukGJu2U9Hed21LYphMaJqRy3yCHV17P/n5yttT8vtNmmfs281UeqFvtUgrRqWvYXw9PsWaYYcgT0PLngNt3ykXb5QrVeOYaqAsQlnR+A6yq0WqJed8s=
+  - secure: M5xqhrBPrCZRGJS8EWuD2VkaDObzbgoFxDnlP57B5drFBJOICp0vOdUzHVyJK+XC0O6fwJpt5pY4VPME44RCqmxQHhqs072RArplXlorub+41SlwDabA60tCmwTmMbMeUqdQ3VmtrnJU99t+aHjXymDxlZ3hXsuk1OViRE3VIhs=
+  - secure: EF/PIn2oPnep2ccLriFYyYFCouzdCDnrIzFWnDSA0+66mMFbkOIDnOJt8gFela8ny3ijWxAxOjP6EpzwbtSYTIqoAcbeY7i4Wt/tE5r0sl0F136cbGGJDTopEr3dAYc/OtENJV1mEx6el3glZuNSRYewiwrXM9XH/b3bUnONGA8=
+  - secure: EhNT5v45at+FpW4dNtOQdmeMTB5ZhxdfBSbZ3Qxfu2NT5SVYMi61S64v8prAJTAisP4LVP5ZmZZ+17Fk0aYUJao+6JuyS1IxjYhu1MnE93AH5A6bMse4kq7/XlAeF/FnmYpDwBHVjWciN1AelbLMQ8/qGILIh28sSafnHXWKGUU=
+  - secure: W2D/k79GWuq2S5biyuBDy3SPBM3jxXr+ocSWHxvXl3rraTqFhM0al6g5OhpmJWpnTaBTaB3hOim2YscEYZOwgjL3QpB+WD/aEKjwyR/bbxgY28J3BpUhLRq1GY6TrfBHlw5i4lH1souAP3dcGHAnYRYIITSex1hOKDptUBdFaC4=
+  - secure: Li2w7mYxwzEF2QuVbfcDV3JVjjCxgwcX6sdMWXyAdGFPZpQGo20z5hQiiaEBzIN3rrX+cAyRYnyxPBlBTdNyRbJCQyT8TRPJpSujA/Uy6uZVVFGvQubUZQaVLXvQHRps/cwNuUqVCWugpDI2hj3NGscVbwOFlSo9WlFUg3Yb1CM=
+  - secure: pqeW35fZqmcTyiqcRbmfmxGo11F8N6gRqVblncUPHeER+I6fV7Wn5kJfr0xJC5Qg1PjswAaaVB5WRNu85JVjR4GcK13CgIN0VjxQmbz5lqhin3ug4STvH3h6O9RMi5t03nZjejGeRPrLz6WT0s/45FjPIZcRQcSAlut2ljr3MB4=
+  - secure: abyHhxOx023YjPuBl7fRg9hB8B9SU86FoMf3ihaSbNsqZ3cOhcXGownsnkIuy8RgWfmsP/+tKkJwWmcaXZ6pF8mtQj8sgIKN4QQmwr+tZQLuwVnLRhUIiBMpeP/dFukoIGxprta/NtbXhwRt3l2Fak0RszQ5lwjX3zn8BY1/YmU=
+  - secure: iQK93InYm5ehdFPDQEpA2toNF1AeFxSLgvdCRDeKy6Ytcbb15StHAwpHVObXmX6Y245G2XmnqDgpi7rM5fvQxcz7S3TPwtfrUUyvdG7HxxrJz/0WTBuhqotMe8jpPiKPbbYnIShRiMMFi8Z/zaQgfk2P7VI1t8zMBWY5R3ir548=
+  - secure: fXdmVBPSJo3jAGYQYYctHiwbvttcGbpE2FIrLlHXeRj/ZHfb83RK5J/5m0ZwdQaq3rgP0qD8vW48ht7ncX2eUIgMTRfIAg3cdk1wdQ+dqbOQOjtDmH3d9nOGP5APUazU+vFFshC/LTs+RxjPG63fjqvZ3EliemmfUH0iCj+YHjo=
+  - secure: gEEa7JgR3lvamqOVm4w3RO2/Ux3M9v2I3lWqYfBmwQozNcRCUVOCXgUy6yMoI8rljWNPpGaYXACc9PyYT/2U8bZcVufuw3rAIynY0/G7cdU8eTI+yJaa90H/xF440bC7a/npqamUCIUe7Lt5cG+RnlLckPlJkFfWgLbjWyWA5tc=
+  - secure: TA3o8LmooXi1gbpRJw4coRzqtw/1uHkZUCiEZLiAwsYMmg4Ebt0xnuVIMgtY7Bd/Z30tvf1FDwsWR4ywV04WZHNP3s+ufMpWtMJtHKRrOOJg7C7+Io6LU3Q5kXVrSEMG/14QSXaCCmYhGaGAPmgYfvwkX0XeBpD7s54/Fy6llu0=
+  - secure: U1WcGogA6AzVFIJRuRg/372SK6B5LpnLYCQXNsixnjCogvjd7w2j+uUdmqvI8mSMk+HsLv/GvlCQ/fWFMnbcpLlh0Y731//Rbjho6tkav7dY5aOsMY5BrlMcSGQ2jpA4vDB2Q3R3mHSdjl8SuQJm9IB/AYAQ5RHH1ERxWHOWL38=
+  - secure: P06J5HClgPwX2QPiD8Co9MiptOAtqcJV6v6S14YbVTFjbP3xCrvuTNEkqQe8XqRjoUkOtFpwxZJpZ06Y1bopwtZI9jRYazmHqbMUhrkm50wGUP40RinCoYOMe9pUv0U5hAV3wf5f6kCIQwe0/fHQZUs7oqOyjIQsunl6asGIDnQ=
+  - secure: G4B4ddkSHMkUqflkWEOSY/JBR8RU+V6X46dGbvL4GFdAySbWpBbgZxCpkYZTLycxXkhspWHv9YWcxBM5D1VD/VOecUIuBp7p9gsliRWP5wj8AqzoLEy2RrMAVT0ous8t1moD4UydJpbDG5dKTzOQASGvj+vXEGVHobCTuolaMz4=
+  - secure: Ne4XQKQWvEY7W4Ac26qr53smUW/2Efwv5Ma8MJQ2BBavzrjPD2OKWDM9881k7aiCYfLsRhkxDWFADVsl7/rmiLmgCE3DhlMmTj/6Atx3qg5KFxGZa+iW2TTK90BuvuWbl/e5LO4wrt4qKPNGlxeTyJqjCLuVmDtYIk86Q8DKRoY=
+  - secure: dArAfNdotRRoq+eUSK7YKTKKCtIAD/2VPr8rrobOKK1Qyzc6rZuV8mtyoMQpJA0SzEAsClYdBzzWBSHlmd6inj2PaxynDM7WkXo5AcV0DB8bBGb3sDtedLQqYNsiQDFHmNV1bl3KTq3oWj3oxvqBMxvCdjMVBa6Tqnx+BUZQMA4=
+  - secure: Slv5tDZvsCtfgJqfeo3sPTdCm2ihxNb8rRwGp9W1kJiLJAPjIO0t2A5wGdRvAjGrP1aYDEnoCmEC8b+eAQFcn8K/VLPRkh1BEjpQV+VcOyDj3SmUwRxs5VVqOQDtV4ACbkP6Y10LXT81ZW2wxaMFn98O+MXwzN8OGZHVuqT9vzI=
+  - secure: UN0ZvHg79suJ23QZ+onWGJPuThus1zYd+rDZU6x7A1XOZmWuc9Tj+hRwoY1595mTMljbwsUhU7Ijv4NVn6XGesi8W/jMFpUaAVGYo1dJmNcDN7UZYT0XNeD6cD8qXEUYsRmP1t3Bs3HRKGp2K0Ms+p5QcZmoggDcrRwzt62qC2g=
+  - secure: mL5A7DtpsURQZJo0byW1mJ2tGL4Xm9Iq4RbuZ7OLH8IvKUYqE+77Ssen3YOj1BKOkLP9nGqIPcQVaj7nuKs5eNN1EjvLZdIBxt/sDqyLt6Doam5PxIBnrQ/KtgrduLT6f74ajGgRtndgyd+Rb3h9KSplRUzMs7omJqoLbLiYbDA=
+  - secure: YGX4nbvRERfEoVhqE1BRTOzqCjhbJywxhfnIoQKhMjJ6IEsgLRJr4mU2BUrSXA/PdtnLV8BAbNmfZ2dfT0SQHPnHIgpIvlrgusWJ/S87vko9KK+vUTnZZ6Vois4CikQCYDoCkKY8s7FUu6gTF/x0vsg9s92JzwgcKuIoD/UnuQs=
+  - secure: G6+z6PVqFTKTvmaIhP2VEkc6G+fPF5SWMTmn1uT36kIN0Uly0glvc0u4osrJlOx/+xR9miwOrWuhqGZYoxBxh9/vbsdEELwWm3qRuw0EjGiRCDTr8TE95dTnr5xIFk28RgY1IQcvGo2ohXlTprwYoiBAw6P4ziQV7vgvvtw2znU=
+  - secure: N7/uA1vkV82/txlKbuJ55FoSl2Sf9AnEPAe3tYX2HrU83bcnpEB06pvZs/QLZ9nhFleqP1F7T6xcmfCsu8VSJp3Y9Skr1WVkAUyHXeBVBmcYsLl6bSyMkMTVuEqWnILXr5ZGrRDx1Z8GtmRXeU9r4xaAJjH1vWHseS+R7Q1IvOk=
+  - secure: mkRTNy0VsWKoJIk/0ZioNbG7GiB9EejEV/I7g9NiW69xM+aVEhquTi+YpuSILKTiok3gxoYMojU28ei7Q4l+Z5wyox/IV6yf0LR4AeXl2yRO2qJnk+p/S20EfsaGmqhJkxsqzU+zkgOqFoBywQeRhzwJUQkUfqISf6EWVKKOAsM=
+  - secure: eQNhXIZq4mKwbRllg/lgNAIlMcjN6hJpYIURRYDsdnmJBBKAr/HPW59gAYNnRxNHUqZ6N7s+kRIE+G+96f6irM422E7//4mRBmjsQJymAVziSsRgEXN8UmwuHTTedQL0d1OpO3EfADNtUrM29r/apiejNXyEhiOy8NBg54Qy9kk=
+  - secure: CY1KEMLprDQTAtUSTecF7xojArCYkfAlKv7Q+M98ZIZ9uXimEEEeW8N2XVRAmwbudqrNTFOsb5xqU9wYAfj2jOLbLG/XpYVJxJxriNCpKhYs/zZuab8FDtprQAQmscT8DO4uPvCphjxfDKag534VGzqCiOr3vAx2gzbkzgDfYVY=
+  - secure: FED+2Rv+rPsCyBy0r1cHxnC7Uzdl4MXKaxiMcWeQkmAn1GLWS4k1GKzQFcqAnu/1e6ODipTgMBOFw5clZ1uDuj5BtEMl23YgmbziUGQAYcJRiDnlBfIDh2H4BkBAgiZgjlkazowKnJTVXjWFUgSO3pmXLcxUIk9jyLg2MSobdAQ=
+  - secure: poEQLLt/U2D1Sqjit2w4uUb6dRwDy3i4pGNLpBW25fAaz39xu6PsgTQMal43YA+ZmTkwAlXHkEmtf8XGkH04puLJamtp6unitTblgwiUNLFRB1G4DQmoC8XA8PtwxTtUeM/csLmWx6uDNQTw9KsyulhiluvE6775/a1vDq6EDTY=
+  - secure: RZ8EoWCRePCl91ub5QdDQeYxT+BZ17Q7fnBRszvNtTGZjzUIauZCjLxZkAcPr3Q7ea+2rZ3eqTJ6jfegrtRUAJJvNRsOAZ3NXvroknfCW05ak0TfHVn7KMRZ6VClmmtRq42CKmfWuHwJU1RyViNG062yNLrVYAgDEt0GPxN+ICg=
+  - secure: jC03YzkY5ogQPG75PYN7HrWpivO4DDQYKG/zoveBpT5cFA6UgtPytM/WVwzt5sW2uLUYr9PE3hmul7AyjzGSBF9bqyapuSpJf08sMctnTx1NAaKZ8AnlIxz5UM5NHYb8ZscB4z0xQJWIHsrUR2IiZ9ixSEA5RiT9F0iIQcaA5P8=
+  - secure: Qg8JFg5008oStWdKLyrDKdllXL07rnSzQqq3kFp+EqIj/h+NRz+AmZjZQ34+tGJrMwMZDsNC2hFAqU8zqpYkX1R3oRxQtERxE7+KX826xswOxFCrQHXZcnl3V+WgL2bZTXriw0ICPu7Yu6VTLVWzuMky3ZGM9+X3KuGbSWQchaM=
+  - secure: OXPtOeS05EUz9IJBllflGTFXQ8RcEKNCCoX7uirEJl78ByozJAGjD3LhvjoSpiGkIgXJ/z8A9DUFN9Jp9X4qipGwrUY+Knlw7pEHGjgGWqA7uj7hs2S6k/3LGpmsvFXAldPjEvegaPqBdv5/o+buiOK4/DmYk50ngRGIeUm68Ac=
   matrix:
   - KITCHEN_INSTANCE='default-ubuntu-1204'
   - KITCHEN_INSTANCE='default-ubuntu-1004'
   - KITCHEN_INSTANCE='default-centos-64'
-#  - KITCHEN_INSTANCE='default-centos-53'
   - KITCHEN_INSTANCE='default-zoo-ubuntu-1204'
   - KITCHEN_INSTANCE='default-zoo-ubuntu-1004'
   - KITCHEN_INSTANCE='default-zoo-centos-64'
-#  - KITCHEN_INSTANCE='default-zoo-centos-53'
   - KITCHEN_INSTANCE='create-collection-ubuntu-1204'
   - KITCHEN_INSTANCE='create-collection-ubuntu-1004'
   - KITCHEN_INSTANCE='create-collection-centos-64'
-#  - KITCHEN_INSTANCE='create-collection-centos-53'
   - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1204'
   - KITCHEN_INSTANCE='create-collection-zoo-ubuntu-1004'
   - KITCHEN_INSTANCE='create-collection-zoo-centos-64'
-#  - KITCHEN_INSTANCE='create-collection-zoo-centos-53'
 script:
 - bundle exec kitchen test $KITCHEN_INSTANCE -l debug
 after_script:
 - bundle exec kitchen destroy $KITCHEN_INSTANCE
 notifications:
   email:
-  - abutovich@qubell.com
+  - aivantsov@qubell.com

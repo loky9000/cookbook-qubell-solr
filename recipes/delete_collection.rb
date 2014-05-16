@@ -2,15 +2,15 @@
 # Delete collection
 #
 
-solr_cores = "#{node["solr"]["path"]}/cores"
+solr_cores = "#{node["cookbook-qubell-solr"]["path"]}/cores"
 
-if (! node["solr"]["zookeeper"]["nodes"].empty?)
+if (! node["cookbook-qubell-solr"]["zookeeper"]["nodes"].empty?)
 #clean zoo
-  zoo_connect = "#{node["solr"]["zookeeper"]["nodes"]}"
+  zoo_connect = "#{node["cookbook-qubell-solr"]["zookeeper"]["nodes"]}"
   bash "clean zookeeper data" do
     user "root"
     code <<-EOH
-    #{node["solr"]["path"]}/webapps/zkcli.sh -zkhost #{zoo_connect} -cmd clear /
+    #{node["cookbook-qubell-solr"]["path"]}/webapps/zkcli.sh -zkhost #{zoo_connect} -cmd clear /
     EOH
   end
 end
