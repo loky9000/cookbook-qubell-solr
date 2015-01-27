@@ -5,6 +5,16 @@
 
 require "pathname"
 
+group node["tomcat"]["group"] do
+  action :create
+  system true
+end
+user node["tomcat"]["user"] do
+  action :create
+  gid node["tomcat"]["group"]
+  system true
+end
+
 # Extract war file from solr archive
 solr_url = "#{node["cookbook-qubell-solr"]["url"]}#{node["cookbook-qubell-solr"]["version"]}/solr-#{node["cookbook-qubell-solr"]["version"]}.tgz"
 version = "#{node["cookbook-qubell-solr"]["version"]}"
